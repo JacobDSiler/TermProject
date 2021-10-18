@@ -1,4 +1,4 @@
-package com.example.termproject;
+package com.example.gameproject;
 
 import org.junit.Test;
 
