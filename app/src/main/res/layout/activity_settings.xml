@@ -9,4 +9,18 @@
     android:adjustViewBounds="true"
     tools:context=".SettingsActivity">
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#D4D4FA"
+        android:onClick="returnToMainMenuActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        app:tint="#23B504"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
