@@ -9,6 +9,20 @@
     android:adjustViewBounds="true"
     tools:context=".SettingsActivity">
 
+    <TextView
+        android:id="@+id/settingsView"
+        android:layout_width="455dp"
+        android:layout_height="106dp"
+        android:fontFamily="@font/monoton"
+        android:text="Settings"
+        android:textColor="#FAF5F5"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"

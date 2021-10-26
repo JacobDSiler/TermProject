@@ -11,15 +11,19 @@
         android:theme="@style/Theme.GameProject">
         <activity
             android:name=".GameActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".HighScoresActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
+            android:screenOrientation="landscape"
             android:exported="false" />
         <activity
             android:name=".MainMenuActivity"
+            android:screenOrientation="landscape"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

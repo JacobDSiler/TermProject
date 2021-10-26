@@ -20,17 +20,18 @@
         app:srcCompat="?attr/actionModeCloseDrawable"
         app:tint="@color/white" />
 
-    <ImageView
-        android:id="@+id/highScoreView"
+    <TextView
+        android:id="@+id/mainMenuView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/monoton"
+        android:text="High Scores"
+        android:textColor="#FAF5F5"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/blue"
-        app:layout_constraintVertical_bias="0.088"
-        app:srcCompat="@drawable/high_score" />
+        app:layout_constraintVertical_bias="0.06" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

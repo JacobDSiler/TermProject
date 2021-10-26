@@ -2,41 +2,68 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsTextView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/sunset_forest"
     tools:context=".MainMenuActivity">
 
-    <Button
-        android:id="@+id/startGameButton"
+    <TextView
+        android:id="@+id/mainMenuView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="openGameActivity"
-        android:text="Start Game"
+        android:fontFamily="@font/press_start_2p"
+        android:text="Flappers"
+        android:textColor="#FAF5F5"
+        android:textSize="80sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.457" />
 
     <Button
         android:id="@+id/highScoresButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#0923CA"
+        android:fontFamily="@font/press_start_2p"
         android:onClick="openHighScoresActivity"
         android:text="High Scores"
-        app:layout_constraintBottom_toTopOf="@+id/startGameButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/startButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#CA0946"
+        android:fontFamily="@font/press_start_2p"
+        android:onClick="openGameActivity"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761" />
 
     <Button
         android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#3DCA09"
+        android:fontFamily="@font/press_start_2p"
         android:onClick="openSettingsActivity"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
+        app:layout_constraintStart_toEndOf="@+id/startButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
