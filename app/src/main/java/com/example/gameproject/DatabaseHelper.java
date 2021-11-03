@@ -59,19 +59,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor getItemID(String name, String score) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COL1 + " FROM " + TABLE_NAME +
-                " WHERE " + COL2 + " = '" + name + "'" +
-                " AND " + COL3 + " = '" + score + "'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-
     public void updateHighScoreName(String id, String name, String score, String newName) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
                 " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" +
+                " AND " + COL2 + " = '" + name + "'" +
+                " AND " + COL3 + " = '" + score + "'";
+        db.execSQL(query);
+    }
+
+    public void updateHighScore(String id, String name, String score, String newScore) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " + COL3 +
+                " = '" + newScore + "' WHERE " + COL1 + " = '" + id + "'" +
                 " AND " + COL2 + " = '" + name + "'" +
                 " AND " + COL3 + " = '" + score + "'";
         db.execSQL(query);

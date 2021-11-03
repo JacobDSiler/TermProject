@@ -32,24 +32,28 @@ public class GameActivity extends AppCompatActivity {
         // put this in a thread and return the list back to the main thread
         Cursor data = myDB.getListContents();
         while (data.moveToNext()) {
-            String scoreId = data.getString(1);
-            String scoreName = data.getString(2);
-            String score = data.getString(3);
+            String scoreId = data.getString(0);
+            String scoreName = data.getString(1);
+            String score = data.getString(2);
+            Log.i("GameActivity", scoreId + " " + scoreName + " " + score);
             HighScore highscore = new HighScore(scoreId, scoreName, score);
             highScoresList.add(highscore);
         }
         // check if the player died right here
-        /*if (highScoresList.get(5).getScore() < gameScore) {
+        int newScore = 21;
+        int lowestScore = Integer.parseInt(highScoresList.get(5).getScore());
+        if (lowestScore < newScore) {
             // pop up box here to get the name from the user
             for (int i = 0; i < highScoresList.size(); i++) {
-                if (highScoresList.get(i).getScore() < gameScore) {
-                    highScoresList.get(i).setName(newName);
-                    highScoresList.get(i).setScore(newScore);
-                    UpdateScore();
+                if (Integer.parseInt(highScoresList.get(i).getScore()) < newScore) {
+                    String name = highScoresList.get(i).getName();
+                    String score = highScoresList.get(i).getScore();
+                    String id = highScoresList.get(i).getId();
+                    myDB.updateHighScore(id, name, score, Integer.toString(newScore));
                     break;
                 }
             }
-        }*/
+        }
 
     }
 }

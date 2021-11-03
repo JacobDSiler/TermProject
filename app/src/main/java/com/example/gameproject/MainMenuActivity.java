@@ -6,9 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainMenuActivity extends AppCompatActivity {
-    DatabaseHelper myDB;
+    private DatabaseHelper myDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,8 +17,10 @@ public class MainMenuActivity extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
         Cursor data = myDB.getListContents();
         if (data.getCount() == 0) {
-            // Write the default scores to the database. Perhaps put this in a thread
+            // TODO: Create a thread for this occur
+            setDefaultHighScores();
         }
+
     }
 
     public void openSettingsActivity(View view) {
@@ -33,5 +36,16 @@ public class MainMenuActivity extends AppCompatActivity {
     public void openGameActivity(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
+    }
+
+    // Put this in a thread
+    public void setDefaultHighScores() {
+        // Write the default scores to the database. Perhaps put this in a thread
+        myDB.addData("0", "Abby", "20");
+        myDB.addData("1", "Jake", "18");
+        myDB.addData("2", "Michael", "16");
+        myDB.addData("3", "Paul", "14");
+        myDB.addData("4", "Sarah", "12");
+        myDB.addData("5", "Sam", "10");
     }
 }
