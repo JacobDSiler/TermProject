@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         myDB = new DatabaseHelper(this);
         Cursor data = myDB.getListContents();
         if (data.getCount() == 0) {

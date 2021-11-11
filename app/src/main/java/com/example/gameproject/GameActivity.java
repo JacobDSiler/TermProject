@@ -21,6 +21,11 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        DisplayMetrics dm = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Constants.setScreenWidth(dm.widthPixels);
+        Constants.setScreenHeight(dm.heightPixels);
+
         /* TODO: In a background thread read the contents from the database into a collection
          * of sorts and then when the player dies check if the score they got is higher than the
          * lowest high score. If it is then have a pop up box appear that will have them enter
