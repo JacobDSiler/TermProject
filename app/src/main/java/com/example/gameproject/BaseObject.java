@@ -12,6 +12,13 @@ public class BaseObject {
     public BaseObject() {
     }
 
+    public BaseObject(float x, float y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
     public BaseObject(float x, float y, int width, int height, Bitmap bm) {
         this.x = x;
         this.y = y;
@@ -61,7 +68,7 @@ public class BaseObject {
     }
 
     public Rect getRect() {
-        return new Rect((int)this.x, (int)this.y, (int)this.x+this.width, (int)this.y+this.height);
+        return new Rect((int) this.x, (int) this.y, (int) this.x + this.width, (int) this.y + this.height);
     }
 
     public void setRect(Rect rect) {

@@ -20,6 +20,12 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Constants.setScreenWidth(dm.widthPixels);
+        Constants.setScreenHeight(dm.heightPixels);
+
         myDB = new DatabaseHelper(this);
         highScoresList = GetHighScores(myDB);
 

@@ -50,7 +50,7 @@ public class Bird extends BaseObject {
         }
         if (this.drop < 0){
             Matrix matrix = new Matrix();
-            matrix.postRotate(-25);
+            matrix.postRotate(-Constants.BIRD_ANGLE_UP);
             return Bitmap.createBitmap(
                     arrBms.get(idCurrentBitmap),
                     0,
@@ -63,9 +63,9 @@ public class Bird extends BaseObject {
         } else if (drop >= 0){
             Matrix matrix = new Matrix();
             if (drop < 70) {
-                matrix.postRotate(-25+(drop*2));
+                matrix.postRotate(-Constants.BIRD_ANGLE_UP+(drop*2));
             } else {
-                matrix.postRotate(45);
+                matrix.postRotate(Constants.BIRD_ANGLE_DOWN);
             }
             return Bitmap.createBitmap(
                     arrBms.get(idCurrentBitmap),
@@ -86,7 +86,7 @@ public class Bird extends BaseObject {
     }
 
     private void drop() {
-        this.drop+=0.6;
-        this.y+=this.drop;
+        this.drop += Constants.BIRD_DROP_RATE;
+        this.y += this.drop;
     }
 }
