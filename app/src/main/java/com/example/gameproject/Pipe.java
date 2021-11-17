@@ -10,7 +10,7 @@ public class Pipe extends BaseObject {
 
     public Pipe(float x, float y, int width, int height) {
         super(x, y, width, height);
-        speed = 12;
+        speed = Constants.PIPE_SPEED;
     }
 
     public void draw(Canvas canvas) {
@@ -20,7 +20,7 @@ public class Pipe extends BaseObject {
 
     public void randomY() {
         Random r = new Random();
-        this.y = r.nextInt((0+this.height/4) + 1) - this.height/4;
+        this.y = r.nextInt((this.height / Constants.PIPE_VARIANCE) + 1) - this.height / Constants.PIPE_VARIANCE;
     }
 
     @Override

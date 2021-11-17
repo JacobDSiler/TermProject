@@ -80,8 +80,10 @@ public class Bird extends BaseObject {
         return this.arrBms.get(idCurrentBitmap);
     }
 
-    public void draw(Canvas canvas){
-        drop();
+    public void draw(Canvas canvas, Boolean falling){
+        if (falling) {
+            drop();
+        }
         canvas.drawBitmap(this.getBm(), this.x, this.y, null);
     }
 
