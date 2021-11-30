@@ -36,11 +36,11 @@ public class SetDefaultScoresRunnable implements Runnable {
 
     // Adds default high scores to the database
     public void setDefaultHighScores() {
-        myDB.addData("0", "Abby", "20");
-        myDB.addData("1", "Jake", "18");
-        myDB.addData("2", "Michael", "16");
-        myDB.addData("3", "Paul", "14");
-        myDB.addData("4", "Sarah", "12");
-        myDB.addData("5", "Sam", "10");
+        myDB.addData("0", "Abby", "4");
+        myDB.addData("1", "Jake", "3");
+        myDB.addData("2", "Michael", "2");
+        myDB.addData("3", "Paul", "2");
+        myDB.addData("4", "Sarah", "1");
+        myDB.addData("5", "Sam", "1");
     }
 }

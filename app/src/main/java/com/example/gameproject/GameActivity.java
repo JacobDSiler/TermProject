@@ -17,9 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GameActivity extends AppCompatActivity {
-    private DatabaseHelper myDB;
-    //Map<String, List<String>> highScores;
-    private List<HighScore> highScoresList;
+    public static DatabaseHelper myDB;
+    public static List<HighScore> highScoresList;
     public static TextView txt_score, txt_best_score, txt_score_over;
     public static RelativeLayout rl_game_over;
     public static Button btn_start;
@@ -63,29 +62,6 @@ public class GameActivity extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
         highScoresList = GetHighScores(myDB);
-
-        // TODO: check if the player died right here. If they did then get the score
-        int newScore = 21;
-        int lowestScore = Integer.parseInt(highScoresList.get(5).getScore());
-        if (lowestScore < newScore) {
-            // TODO: Have pop up box appear to get the name from the user then pass it below
-            saveNewHighScore(newScore, "Jill");
-        }
-    }
-
-    public void saveNewHighScore(int newScore, String newName) {
-        for (int i = 0; i < highScoresList.size(); i++) {
-            if (Integer.parseInt(highScoresList.get(i).getScore()) < newScore) {
-                String name = highScoresList.get(i).getName();
-                String score = highScoresList.get(i).getScore();
-                String id = highScoresList.get(i).getId();
-                String newScoreStr = Integer.toString(newScore);
-                Log.i("GameActivity", id + " " + newName + " " + newScoreStr);
-                myDB.updateHighScore(id, name, score, newScoreStr);
-                myDB.updateHighScoreName(id, name, newScoreStr, newName);
-                break;
-            }
-        }
     }
 
     public List<HighScore> GetHighScores(DatabaseHelper myDB) {
