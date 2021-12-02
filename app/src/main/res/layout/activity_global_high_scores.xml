@@ -4,43 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/desert_night_sky"
-    tools:context=".HighScoresActivity">
+    android:background="@drawable/jungle"
+    tools:context=".GlobalHighScoresActivity">
+
+    <Button
+        android:id="@+id/highScoresButton"
+        android:layout_width="61dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="#FCFDFC"
+        android:fontFamily="@font/press_start_2p"
+        android:onClick="openHighScoresActivity"
+        android:text="local"
+        android:textColor="#65F45A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.295" />
 
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:background="@color/blue"
+        android:background="#7FF607"
         android:onClick="returnToMainMenuActivity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable"
         app:tint="@color/white" />
 
-    <Button
-        android:id="@+id/highScoresButton"
-        android:layout_width="59dp"
-        android:layout_height="115dp"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="@color/purple_700"
-        android:fontFamily="@font/press_start_2p"
-        android:onClick="openGlobalHighScoresActivity"
-        android:text="Global"
-        android:textColor="#F6F8F5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
-
     <TextView
         android:id="@+id/mainMenuView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/monoton"
-        android:text="High Scores"
+        android:text="Global Scores"
         android:textColor="#FAF5F5"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -3,7 +3,6 @@ package com.example.gameproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,16 +12,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HighScoresActivity extends AppCompatActivity {
-    DatabaseHelper myDB;
+public class GlobalHighScoresActivity extends AppCompatActivity {
+
+    private DatabaseHelper myDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_high_scores);
+        setContentView(R.layout.activity_global_high_scores);
         myDB = new DatabaseHelper(this);
         Cursor data = myDB.getListContents();
         if (data.getCount() == 0) {
-            Log.i("HighScoreActivity", "DATABASE IS EMPTY");
+            Log.i("GlobalScoresActivity", "DATABASE IS EMPTY");
         }
         else {
             setHighScores(data);
@@ -30,23 +30,25 @@ public class HighScoresActivity extends AppCompatActivity {
     }
 
     public void setHighScores(Cursor data) {
-        Log.i("HighScoreActivity", "READING FROM DATABASE");
-        int i = 0;
+        Log.i("GlobalScoreActivity", "READING FROM DATABASE");
+        int i = 0; // This is used as the index to place the values from the database into the correct textviews
+        int j = 0; // used to get to the middle of the database where the global scores begin
         List<TextView> textViewList = createTextViewList();
         while (data.moveToNext()) {
             if (i == 12)
                 break;
-            else {
+            else if (j >= 6) {
                 String scoreId = data.getString(0);
                 String scoreName = data.getString(1);
                 String score = data.getString(2);
                 String row = scoreId + " " + scoreName + " " + score;
-                Log.i("HighScoreActivity", "Row: " + row);
+                Log.i("GlobalScoreActivity", "Row: " + row);
                 textViewList.get(i).setText(scoreName);
                 i++;
                 textViewList.get(i).setText(score);
                 i++;
             }
+            j++;
         }
     }
 
@@ -55,8 +57,8 @@ public class HighScoresActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openGlobalHighScoresActivity(View view) {
-        Intent intent = new Intent(this, GlobalHighScoresActivity.class);
+    public void openHighScoresActivity(View view) {
+        Intent intent = new Intent(this, HighScoresActivity.class);
         startActivity(intent);
     }
 

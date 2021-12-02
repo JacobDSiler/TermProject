@@ -32,7 +32,7 @@ public class GetHighScoresRunnable implements Runnable {
         final Activity activity = activityRef.get();
         if (activity != null) {
             //highScoresList = GetHighScores(myDB);
-            highScoresList = new ArrayList<HighScore>(6);
+            highScoresList = new ArrayList<HighScore>(12);
             // put this in a thread and return the list back to the main thread
             Cursor data = myDB.getListContents();
             while (data.moveToNext()) {
@@ -43,13 +43,10 @@ public class GetHighScoresRunnable implements Runnable {
                 HighScore highscore = new HighScore(scoreId, scoreName, score);
                 highScoresList.add(highscore);
             }
+
             //return highScoresList;
         }
     }
-
-    /*public List<HighScore> GetHighScores(DatabaseHelper myDB) {
-
-    }*/
 
     public List<HighScore> getHighScoresList() {
         return highScoresList;

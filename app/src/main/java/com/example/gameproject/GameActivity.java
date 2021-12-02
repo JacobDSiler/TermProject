@@ -2,6 +2,7 @@ package com.example.gameproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +64,12 @@ public class GameActivity extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
         highScoresList = GetHighScores(myDB);
+
+    }
+
+    public void returnToMainMenuActivity(View view) {
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
     }
 
     public List<HighScore> GetHighScores(DatabaseHelper myDB) {

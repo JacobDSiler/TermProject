@@ -42,5 +42,11 @@ public class SetDefaultScoresRunnable implements Runnable {
         myDB.addData("3", "Paul", "2");
         myDB.addData("4", "Sarah", "1");
         myDB.addData("5", "Sam", "1");
+        myDB.addData("6", "Splash30", "4");
+        myDB.addData("7", "Flappers10", "3");
+        myDB.addData("8", "123Shoot", "2");
+        myDB.addData("9", "TheRock$", "2");
+        myDB.addData("10", "Spidy#44", "1");
+        myDB.addData("11", "Goku33", "1");
     }
 }

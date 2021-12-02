@@ -1,5 +1,6 @@
 package com.example.gameproject;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ public class GameView extends View {
     private int score, bestScore = 0;
     private boolean start;
     private Context context;
+    private boolean collision;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -40,7 +42,9 @@ public class GameView extends View {
         if (sharedPreferences != null) {
             bestScore = sharedPreferences.getInt("bestScore", 0);
         }
+
         score = 0;
+        collision = false;
         bestScore = 0;
         start = false;
 
@@ -49,6 +53,11 @@ public class GameView extends View {
         handler = new Handler();
         r = this::invalidate;
     }
+
+    public void setScore(int num) { this.score = num; }
+    public int getScore() { return score; }
+    public boolean isCollision() { return collision; }
+    public void setCollision(boolean collide) { this.collision = collide; }
 
     private void initPipe() {
         arrPipes = new ArrayList<>();
@@ -89,9 +98,11 @@ public class GameView extends View {
         bird.setArrBms(arrBms);
     }
 
-    public void saveNewHighScore(int newScore, String newName) {
-        for (int i = 0; i < GameActivity.highScoresList.size(); i++) {
-            if (Integer.parseInt(GameActivity.highScoresList.get(i).getScore()) < newScore) {
+    public void saveLocalNewHighScore(int newScore, String newName) {
+        //for (int i = 0; i < GameActivity.highScoresList.size(); i++) {
+
+        for (int i = 0; i < 6; i++) {
+        if (Integer.parseInt(GameActivity.highScoresList.get(i).getScore()) < newScore) {
                 String name = GameActivity.highScoresList.get(i).getName();
                 String score = GameActivity.highScoresList.get(i).getScore();
                 String id = GameActivity.highScoresList.get(i).getId();
@@ -99,6 +110,21 @@ public class GameView extends View {
                 Log.i("GameView", id + " " + newName + " " + newScoreStr);
                 GameActivity.myDB.updateHighScore(id, name, score, newScoreStr);
                 GameActivity.myDB.updateHighScoreName(id, name, newScoreStr, newName);
+                break;
+            }
+        }
+    }
+
+    public void saveGlobalNewHighScore(int newScore, String username) {
+        for (int i = 6; i < 12; i++) {
+            if (Integer.parseInt(GameActivity.highScoresList.get(i).getScore()) < newScore) {
+                String name = GameActivity.highScoresList.get(i).getName();
+                String score = GameActivity.highScoresList.get(i).getScore();
+                String id = GameActivity.highScoresList.get(i).getId();
+                String newScoreStr = Integer.toString(newScore);
+                Log.i("GameView", id + " " + username + " " + newScoreStr);
+                GameActivity.myDB.updateHighScore(id, name, score, newScoreStr);
+                GameActivity.myDB.updateHighScoreName(id, name, newScoreStr, username);
                 break;
             }
         }
@@ -118,12 +144,20 @@ public class GameView extends View {
                     GameActivity.txt_best_score.setText(String.format("Best: %d", bestScore));
                     GameActivity.txt_score.setVisibility(INVISIBLE);
                     GameActivity.rl_game_over.setVisibility(VISIBLE);
+                    if (!isCollision()) {
+                        SharedPreferences sp = context.getSharedPreferences("username", Context.MODE_PRIVATE);
+                        String playerName = sp.getString("player", "");
 
-                    // If new high score
-                    int lowestScore = Integer.parseInt(GameActivity.highScoresList.get(5).getScore());
-                    if (score > lowestScore) {
-                        // TODO: Pop up box here to prompt the user for their name then collect that name and pass it to the function
-                        saveNewHighScore(score, "Gamer");
+                        // If new high score
+                        int lowestLocalScore = Integer.parseInt(GameActivity.highScoresList.get(5).getScore());
+                        int lowestGlobalScore = Integer.parseInt(GameActivity.highScoresList.get(11).getScore());
+                        if (score > lowestLocalScore) {
+                            saveLocalNewHighScore(score, playerName);
+                        }
+                        if (score > lowestGlobalScore) {
+                            saveGlobalNewHighScore(score, playerName);
+                        }
+                        setCollision(true);
                     }
                 }
 
@@ -173,7 +207,8 @@ public class GameView extends View {
 
     public void reset() {
         GameActivity.txt_score.setText("0");
-        score = 0;
+        setCollision(false);
+        setScore(0);
         initPipe();
         initBird();
     }

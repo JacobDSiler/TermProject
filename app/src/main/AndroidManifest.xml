@@ -10,21 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameProject">
         <activity
+            android:name=".MainMenuActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".GlobalHighScoresActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".GameActivity"
-            android:screenOrientation="landscape"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".HighScoresActivity"
-            android:screenOrientation="landscape"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".SettingsActivity"
-            android:screenOrientation="landscape"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".MainMenuActivity"
-            android:screenOrientation="landscape"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
