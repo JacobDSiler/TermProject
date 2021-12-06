@@ -13,6 +13,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+ /**********************************************************
+ * High scores activity that displays the local high scores of the user
+ * with the accompanying player name high score rank. This activity
+ * utilizes the SQLite database
+ ************************************************************/
 public class HighScoresActivity extends AppCompatActivity {
     DatabaseHelper myDB;
     @Override
@@ -29,10 +34,12 @@ public class HighScoresActivity extends AppCompatActivity {
         }
     }
 
+    // Set the player name and score using the database for the user to visualize
     public void setHighScores(Cursor data) {
         Log.i("HighScoreActivity", "READING FROM DATABASE");
         int i = 0;
         List<TextView> textViewList = createTextViewList();
+        // Loop through the first 6 values in the database table
         while (data.moveToNext()) {
             if (i == 12)
                 break;
@@ -42,6 +49,7 @@ public class HighScoresActivity extends AppCompatActivity {
                 String score = data.getString(2);
                 String row = scoreId + " " + scoreName + " " + score;
                 Log.i("HighScoreActivity", "Row: " + row);
+                // Add the name and score to the textviews for a visual
                 textViewList.get(i).setText(scoreName);
                 i++;
                 textViewList.get(i).setText(score);
@@ -50,17 +58,20 @@ public class HighScoresActivity extends AppCompatActivity {
         }
     }
 
+    // When the back arrow button is pressed the user will be navigated back to the main menu activity
     public void returnToMainMenuActivity(View view) {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
 
+    // When the global button is pressed the user will be navigated to the global scores activity screen
     public void openGlobalHighScoresActivity(View view) {
         Intent intent = new Intent(this, GlobalHighScoresActivity.class);
         startActivity(intent);
     }
 
-    // Potentially change this a linear layout or some other view
+    // Function that adds all of the player name and score textviews
+    // to a list so they can be written to for the user to visualize
     public List<TextView> createTextViewList() {
         List<TextView> textViewList = new ArrayList<TextView>(12);
         TextView scoreView = findViewById(R.id.score1View);

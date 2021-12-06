@@ -18,6 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**********************************************************
+ * Game activity that manages the game through the game view class.
+ ************************************************************/
 public class GameActivity extends AppCompatActivity {
     public static DatabaseHelper myDB;
     public static List<HighScore> highScoresList;
@@ -43,6 +46,8 @@ public class GameActivity extends AppCompatActivity {
         rl_game_over = findViewById(R.id.rl_game_over);
         btn_start = findViewById(R.id.btn_start);
         gameView = findViewById(R.id.gameView);
+
+        // Start the game
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +57,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        // Reset the game variables and play the game again
         rl_game_over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,11 +73,14 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    // Take the user back to the main menu
     public void returnToMainMenuActivity(View view) {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
 
+    // Reduce the strain on the UI thread by running a background thread
+    // to get the high scores from the database table
     public List<HighScore> GetHighScores(DatabaseHelper myDB) {
         GetHighScoresRunnable r1 = new GetHighScoresRunnable(this, myDB);
         Thread thread1 = new Thread(r1);

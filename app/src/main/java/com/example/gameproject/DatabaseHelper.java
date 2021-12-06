@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /*************************************************************
  * Class: Database Helper
  * Function: Store the information associated with the players
- * top 10 high scores
+ * top 6 local high scores and the top 6 global scores
  *************************************************************/
 public class DatabaseHelper extends SQLiteOpenHelper {
 

@@ -12,6 +12,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**********************************************************
+ * Global high scores activity that displays the global high scores of the user
+ * with the accompanying player name and high score rank. This activity
+ * utilizes the SQLite database
+ ************************************************************/
 public class GlobalHighScoresActivity extends AppCompatActivity {
 
     private DatabaseHelper myDB;
@@ -29,11 +34,14 @@ public class GlobalHighScoresActivity extends AppCompatActivity {
         }
     }
 
+    // Add the global high scores to the textviews for the user to visualize
     public void setHighScores(Cursor data) {
         Log.i("GlobalScoreActivity", "READING FROM DATABASE");
         int i = 0; // This is used as the index to place the values from the database into the correct textviews
         int j = 0; // used to get to the middle of the database where the global scores begin
         List<TextView> textViewList = createTextViewList();
+        // Loop through the database table and add the score data from the bottom half of
+        // database to the textview list
         while (data.moveToNext()) {
             if (i == 12)
                 break;
@@ -52,17 +60,19 @@ public class GlobalHighScoresActivity extends AppCompatActivity {
         }
     }
 
+    // Take the user to the main menu
     public void returnToMainMenuActivity(View view) {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
 
+    // Take the user to the local high scores
     public void openHighScoresActivity(View view) {
         Intent intent = new Intent(this, HighScoresActivity.class);
         startActivity(intent);
     }
 
-    // Potentially change this a linear layout or some other view
+    // Generate a list with the player name and score textviews
     public List<TextView> createTextViewList() {
         List<TextView> textViewList = new ArrayList<TextView>(12);
         TextView scoreView = findViewById(R.id.score1View);

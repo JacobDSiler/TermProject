@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**********************************************************
+ * Login activity that prompts the user for a player name
+ * that will be used when the player beats a high score.
+ * The user will be taken to the main menu from here. The
+ * login activity is the starting point of the app
+ ************************************************************/
 public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
 
@@ -24,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         saveplayername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Error checking
                 if (TextUtils.isEmpty(playername.getText().toString()))
                     Toast.makeText(LoginActivity.this, "Enter a player name", Toast.LENGTH_SHORT).show();
                 else if (playername.getText().toString().length() > 12)
@@ -42,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    // Take the user to the main menu activity
     public void openMainMenuActivity() {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);

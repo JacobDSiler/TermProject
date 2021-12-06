@@ -1,5 +1,10 @@
 package com.example.gameproject;
 
+/**********************************************************
+ * CLASS: High Score
+ * DESCRIPTION: Class object that's used for storing and collecting
+ * player high scores. The object includes an id, name, score.
+ ************************************************************/
 public class HighScore {
     private String id;
     private String name;
