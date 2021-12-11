@@ -22,6 +22,7 @@ public class GetHighScoresRunnable implements Runnable {
     private WeakReference<Activity> activityRef;
     private List<HighScore> highScoresList;
 
+    // Constructor to initialize database object and activity reference
     public GetHighScoresRunnable(Activity activity, DatabaseHelper myDB) {
         this.activityRef = new WeakReference<Activity>(activity);
         this.myDB = myDB;
@@ -31,10 +32,11 @@ public class GetHighScoresRunnable implements Runnable {
     public void run() {
         final Activity activity = activityRef.get();
         if (activity != null) {
-            //highScoresList = GetHighScores(myDB);
             highScoresList = new ArrayList<HighScore>(12);
-            // put this in a thread and return the list back to the main thread
+            // Get the contents from the database
             Cursor data = myDB.getListContents();
+
+            // Traverse the data from the database and add it to a list of high score objects with some logging
             while (data.moveToNext()) {
                 String scoreId = data.getString(0);
                 String scoreName = data.getString(1);
@@ -48,6 +50,7 @@ public class GetHighScoresRunnable implements Runnable {
         }
     }
 
+    // Return a list of high score objects to an activity
     public List<HighScore> getHighScoresList() {
         return highScoresList;
     }

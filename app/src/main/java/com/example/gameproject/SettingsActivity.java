@@ -8,6 +8,11 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
+/**********************************************************
+ * Settings activity that provides the user the option to change
+ * the volume at which the game volume is set at.
+ ************************************************************/
+
 public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
         MenuSong.startMenuSong();
     }
 
+    // Take the user back to the main menu
     public void returnToMainMenuActivity(View view) {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
