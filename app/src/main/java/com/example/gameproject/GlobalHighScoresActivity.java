@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,8 +19,8 @@ import java.util.List;
  * utilizes the SQLite database
  ************************************************************/
 public class GlobalHighScoresActivity extends AppCompatActivity {
-
     private DatabaseHelper myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,8 @@ public class GlobalHighScoresActivity extends AppCompatActivity {
         else {
             setHighScores(data);
         }
+
+        MenuSong.startMenuSong();
     }
 
     // Add the global high scores to the textviews for the user to visualize
@@ -105,5 +108,17 @@ public class GlobalHighScoresActivity extends AppCompatActivity {
         textViewList.add(playerView);
         textViewList.add(scoreView);
         return textViewList;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MenuSong.startMenuSong();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MenuSong.pauseMenuSong();
     }
 }

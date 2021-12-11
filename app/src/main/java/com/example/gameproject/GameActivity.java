@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,6 +29,8 @@ public class GameActivity extends AppCompatActivity {
     public static RelativeLayout rl_game_over;
     public static Button btn_start;
     private GameView gameView;
+    public static MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,21 @@ public class GameActivity extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
         highScoresList = GetHighScores(myDB);
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.sillychipsong);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
     }
 
     // Take the user back to the main menu

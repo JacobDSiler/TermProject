@@ -3,15 +3,27 @@ package com.example.gameproject;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 
+/**
+ * BaseObject is used as the parent for objects in the game. Creates the position,
+ * size, and bitmap for every object
+ */
 public class BaseObject {
     protected float x, y;
     protected int width, height;
     protected Rect rect;
     protected Bitmap bm;
 
-    public BaseObject() {
-    }
 
+    public BaseObject() { }
+
+    /**
+     * Constructor for BaseObject
+     *
+     * @param x x coordinate for object
+     * @param y y coordinate for object
+     * @param width width of object
+     * @param height height of object
+     */
     public BaseObject(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -19,6 +31,14 @@ public class BaseObject {
         this.height = height;
     }
 
+    /**
+     * Constructor for BaseObject
+     *
+     * @param x x coordinate for object
+     * @param y y coordinate for object
+     * @param width width of object
+     * @param height height of object
+     */
     public BaseObject(float x, float y, int width, int height, Bitmap bm) {
         this.x = x;
         this.y = y;

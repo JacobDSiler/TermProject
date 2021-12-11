@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -46,12 +47,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     // Take the user to the main menu activity
     public void openMainMenuActivity() {
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MenuSong.startMenuSong();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MenuSong.pauseMenuSong();
     }
 }
