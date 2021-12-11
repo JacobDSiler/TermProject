@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 
 /**********************************************************
- * Main menu activity where the user is directed after entering
- * a player name. The main menu provides the functionality to
+ * Main menu activity that provides the functionality to
  * take the user to the high scores, settings, and game screens.
  * If the database is empty this activity will initialize the
  * database with default scores for both local and global scores.
+ * This activity is the starting point of the app
  ************************************************************/
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -37,10 +37,9 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Take the user to play the game
-    public void openGameActivity(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
+    // Take the user to enter a play name before entering the game
+    public void openLoginActivity(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
-
 }

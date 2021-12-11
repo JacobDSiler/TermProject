@@ -36,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method used to write default values to the database table
     public boolean addData(String id, String name, String score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -53,12 +54,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Get the data from the database table and returns the information
+    // in a cursor data type
     public Cursor getListContents(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         return data;
     }
 
+    // Updates the high score name by grabbing the old information for the row in
+    // in the table and then updates the item from the row that needs to be updated
     public void updateHighScoreName(String id, String name, String score, String newName) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " + COL2 +
@@ -68,6 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    // Updates the high score number by grabbing the old information for the row in
+    // in the table and then updates the item from the row that needs to be updated
     public void updateHighScore(String id, String name, String score, String newScore) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " + COL3 +

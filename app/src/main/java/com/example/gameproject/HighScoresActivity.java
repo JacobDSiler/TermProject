@@ -26,6 +26,10 @@ public class HighScoresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_high_scores);
         myDB = new DatabaseHelper(this);
         Cursor data = myDB.getListContents();
+
+        // If the database is empty log the message else
+        // set the textviews to the scores from the database
+        // and log the name, id, and score read from the database
         if (data.getCount() == 0) {
             Log.i("HighScoreActivity", "DATABASE IS EMPTY");
         }

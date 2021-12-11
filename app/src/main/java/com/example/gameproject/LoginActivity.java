@@ -15,8 +15,7 @@ import android.widget.Toast;
 /**********************************************************
  * Login activity that prompts the user for a player name
  * that will be used when the player beats a high score.
- * The user will be taken to the main menu from here. The
- * login activity is the starting point of the app
+ * The user will be taken to the game screen from here.
  ************************************************************/
 public class LoginActivity extends AppCompatActivity {
     SharedPreferences sp;
@@ -27,10 +26,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         EditText playername = findViewById(R.id.edit_playername);
         Button saveplayername = findViewById(R.id.savePlayerName);
+        playername.setText("Flapper1");
         saveplayername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Error checking
+                // Error checking for the length of the name entered
                 if (TextUtils.isEmpty(playername.getText().toString()))
                     Toast.makeText(LoginActivity.this, "Enter a player name", Toast.LENGTH_SHORT).show();
                 else if (playername.getText().toString().length() > 12)
@@ -42,16 +42,16 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("player", username);
                     editor.commit();
-                    openMainMenuActivity();
+                    openGameActivity();
                 }
             }
         });
 
     }
 
-    // Take the user to the main menu activity
-    public void openMainMenuActivity() {
-        Intent intent = new Intent(this, MainMenuActivity.class);
+    // Take the user to the game activity
+    public void openGameActivity() {
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 }

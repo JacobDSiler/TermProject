@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameProject">
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".LoginActivity"
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
@@ -30,7 +30,7 @@
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainMenuActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>

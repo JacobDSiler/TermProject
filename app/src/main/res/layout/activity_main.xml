@@ -43,7 +43,7 @@
         android:layout_height="50dp"
         android:backgroundTint="#CA0946"
         android:fontFamily="@font/press_start_2p"
-        android:onClick="openGameActivity"
+        android:onClick="openLoginActivity"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
