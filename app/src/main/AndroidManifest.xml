@@ -9,10 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameProject">
+        <service
+            android:name=".MenuSong"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".GlobalHighScoresActivity"
             android:exported="false"

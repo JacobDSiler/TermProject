@@ -1,11 +1,17 @@
 package com.example.gameproject;
 
+import static java.lang.String.*;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -26,14 +32,15 @@ public class GameView extends View {
     private int score, bestScore = 0;
     private boolean start;
     private Context context;
+    private int soundJump;
+    private int soundDeath;
     private boolean collision;
+    private float volume;
+    private boolean loadedSound;
+    private SoundPool soundPool;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        // ***************************************************************************************************
-        // Set the game mode or difficulty, should be set from MainMenuActivity though
-        // Also, might need to consider scoring with different difficulties, I didn't think about that before
-        // ***************************************************************************************************
 
         Constants.setNormal();
 
@@ -52,6 +59,23 @@ public class GameView extends View {
         initPipe();
         handler = new Handler();
         r = this::invalidate;
+
+
+        SoundPool.Builder builder = new SoundPool.Builder();
+
+        AudioAttributes audioAttributes = new AudioAttributes
+                .Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        builder.setAudioAttributes(audioAttributes).setMaxStreams(5);
+
+        this.soundPool = builder.build();
+
+        this.soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> loadedSound = true);
+        soundJump = this.soundPool.load(context, R.raw.jump_02, 1);
+        soundDeath = this.soundPool.load(context, R.raw.death, 1);
     }
 
     public void setScore(int num) { this.score = num; }
@@ -64,7 +88,7 @@ public class GameView extends View {
         for (int i = 0; i < Constants.PIPE_SUM; i++) {
             if (i < Constants.PIPE_SUM / 2) {
                 this.arrPipes.add(new Pipe(
-                        Constants.SCREEN_WIDTH + i * (Constants.SCREEN_WIDTH + Constants.PIPE_WIDTH)/(Constants.PIPE_SUM / 2),
+                        Constants.SCREEN_WIDTH + (float)i * (Constants.SCREEN_WIDTH + Constants.PIPE_WIDTH)/(float)(Constants.PIPE_SUM / 2),
                         0,
                         Constants.PIPE_WIDTH,
                         Constants.PIPE_HEIGHT)
@@ -99,8 +123,6 @@ public class GameView extends View {
     }
 
     public void saveLocalNewHighScore(int newScore, String newName) {
-        //for (int i = 0; i < GameActivity.highScoresList.size(); i++) {
-
         for (int i = 0; i < 6; i++) {
         if (Integer.parseInt(GameActivity.highScoresList.get(i).getScore()) < newScore) {
                 String name = GameActivity.highScoresList.get(i).getName();
@@ -141,7 +163,7 @@ public class GameView extends View {
                     Pipe.speed = 0;
                     bestScore = Integer.parseInt(GameActivity.highScoresList.get(0).getScore());
                     GameActivity.txt_score_over.setText(GameActivity.txt_score.getText());
-                    GameActivity.txt_best_score.setText(String.format("Best: %d", bestScore));
+                    GameActivity.txt_best_score.setText(format("Best: %d", bestScore));
                     GameActivity.txt_score.setVisibility(INVISIBLE);
                     GameActivity.rl_game_over.setVisibility(VISIBLE);
                     if (!isCollision()) {
@@ -158,15 +180,19 @@ public class GameView extends View {
                             saveGlobalNewHighScore(score, playerName);
                         }
                         setCollision(true);
+                        GameActivity.mediaPlayer.pause();
+                        if (loadedSound) {
+                            this.soundPool.play(this.soundDeath, (float).5, (float)0.5, 1, 0, 1f);
+                        }
                     }
                 }
 
                 // If Bird is at middle of x for pipe
-                if (this.bird.getX() + this.bird.getWidth() / 2 > arrPipes.get(i).getX() + arrPipes.get(i).getWidth() / 2
-                        && this.bird.getX() + this.bird.getWidth() / 2 <= arrPipes.get(i).getX() + arrPipes.get(i).getWidth() / 2 + Pipe.speed
+                if (this.bird.getX() + this.bird.getWidth() / 2.0 > arrPipes.get(i).getX() + arrPipes.get(i).getWidth() / 2.0
+                        && this.bird.getX() + this.bird.getWidth() / 2.0 <= arrPipes.get(i).getX() + arrPipes.get(i).getWidth() / 2.0 + Pipe.speed
                         && i < Constants.PIPE_SUM / 2) {
                     score++;
-                    GameActivity.txt_score.setText("" + score);
+                    GameActivity.txt_score.setText(format("%d", score));
 
                 }
 
@@ -182,7 +208,7 @@ public class GameView extends View {
             }
         } else {
             if (bird.getY() > Constants.SCREEN_HEIGHT) {
-                bird.setDrop(-15*Constants.SCREEN_HEIGHT/1920);
+                bird.setDrop((float) (-15*Constants.SCREEN_HEIGHT/1920));
             }
             bird.draw(canvas, false);
         }
@@ -193,12 +219,11 @@ public class GameView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             bird.setDrop(-Constants.BIRD_DROP);
+            if (loadedSound) {
+                this.soundPool.play(this.soundJump, (float).5, (float)0.5, 1, 0, 1f);
+            }
         }
         return true;
-    }
-
-    public boolean isStart() {
-        return start;
     }
 
     public void setStart(boolean start) {
@@ -208,6 +233,7 @@ public class GameView extends View {
     public void reset() {
         GameActivity.txt_score.setText("0");
         setCollision(false);
+        GameActivity.mediaPlayer.start();
         setScore(0);
         initPipe();
         initBird();

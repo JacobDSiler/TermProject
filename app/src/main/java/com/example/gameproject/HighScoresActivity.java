@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.List;
  ************************************************************/
 public class HighScoresActivity extends AppCompatActivity {
     DatabaseHelper myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class HighScoresActivity extends AppCompatActivity {
         else {
             setHighScores(data);
         }
+
+        MenuSong.startMenuSong();
     }
 
     // Set the player name and score using the database for the user to visualize
@@ -109,4 +113,16 @@ public class HighScoresActivity extends AppCompatActivity {
         textViewList.add(scoreView);
         return textViewList;
     }
+
+     @Override
+     protected void onResume() {
+         super.onResume();
+         MenuSong.startMenuSong();
+     }
+
+     @Override
+     protected void onPause() {
+         super.onPause();
+         MenuSong.pauseMenuSong();
+     }
 }
