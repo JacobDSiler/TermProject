@@ -1,6 +1,9 @@
 package com.example.gameproject;
 
 public final class Constants {
+    // General
+    public static int VOLUME = 100;
+
     // Screen
     public static int SCREEN_HEIGHT = 1080;
     public static int SCREEN_WIDTH = 1920;

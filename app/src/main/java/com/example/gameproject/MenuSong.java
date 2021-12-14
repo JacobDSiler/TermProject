@@ -24,6 +24,12 @@ public class MenuSong extends Service {
         mediaPlayer.pause();
     }
 
+    public static void setMenuSongVolume(int volume) {
+        float setVolume = (float) (volume / 100.00);
+        Constants.VOLUME = volume;
+        mediaPlayer.setVolume(setVolume, setVolume);
+    }
+
 
 
     @Override

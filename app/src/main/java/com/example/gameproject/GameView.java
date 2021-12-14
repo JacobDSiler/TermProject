@@ -86,6 +86,7 @@ public class GameView extends View {
     private void initPipe() {
         arrPipes = new ArrayList<>();
         for (int i = 0; i < Constants.PIPE_SUM; i++) {
+
             if (i < Constants.PIPE_SUM / 2) {
                 this.arrPipes.add(new Pipe(
                         Constants.SCREEN_WIDTH + (float)i * (Constants.SCREEN_WIDTH + Constants.PIPE_WIDTH)/(float)(Constants.PIPE_SUM / 2),
@@ -154,6 +155,7 @@ public class GameView extends View {
 
     public void draw(Canvas canvas) {
         super.draw(canvas);
+
         if (start) {
             bird.draw(canvas, true);
             for (int i = 0; i < Constants.PIPE_SUM; i++) {
