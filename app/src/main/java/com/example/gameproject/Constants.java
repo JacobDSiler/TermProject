@@ -1,7 +1,11 @@
 package com.example.gameproject;
 
+/**
+ * Constants for the game
+ */
 public final class Constants {
     // General
+    public static boolean HARD = false;
     public static int VOLUME = 100;
 
     // Screen
@@ -42,6 +46,7 @@ public final class Constants {
     }
 
     public static void setNormal() {
+        HARD = false;
         PIPE_SUM = 6;
         PIPE_DISTANCE = 325;
         PIPE_WIDTH = 200;
@@ -49,6 +54,7 @@ public final class Constants {
     }
 
     public static void setHard() {
+        HARD = true;
         PIPE_SUM = 6;
         PIPE_DISTANCE = 275;
         PIPE_WIDTH = 225;

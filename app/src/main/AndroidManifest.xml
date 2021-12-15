@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameProject">
         <service
-            android:name=".MenuSong"
+            android:name=".MenuSongService"
             android:enabled="true"
             android:exported="true"></service>
 

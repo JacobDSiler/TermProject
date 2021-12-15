@@ -3,9 +3,7 @@ package com.example.gameproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +37,7 @@ public class HighScoresActivity extends AppCompatActivity {
             setHighScores(data);
         }
 
-        MenuSong.startMenuSong();
+        MenuSongService.startMenuSong();
     }
 
     // Set the player name and score using the database for the user to visualize
@@ -117,12 +115,12 @@ public class HighScoresActivity extends AppCompatActivity {
      @Override
      protected void onResume() {
          super.onResume();
-         MenuSong.startMenuSong();
+         MenuSongService.startMenuSong();
      }
 
      @Override
      protected void onPause() {
          super.onPause();
-         MenuSong.pauseMenuSong();
+         MenuSongService.pauseMenuSong();
      }
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +33,7 @@ public class GlobalHighScoresActivity extends AppCompatActivity {
             setHighScores(data);
         }
 
-        MenuSong.startMenuSong();
+        MenuSongService.startMenuSong();
     }
 
     // Add the global high scores to the textviews for the user to visualize
@@ -113,12 +112,12 @@ public class GlobalHighScoresActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MenuSong.startMenuSong();
+        MenuSongService.startMenuSong();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MenuSong.pauseMenuSong();
+        MenuSongService.pauseMenuSong();
     }
 }

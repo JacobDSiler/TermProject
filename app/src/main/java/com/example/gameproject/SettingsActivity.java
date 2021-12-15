@@ -3,10 +3,9 @@ package com.example.gameproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 
 /**********************************************************
@@ -20,11 +19,21 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // set a change listener on the SeekBar
+        // Set seekbar with listener
         SeekBar seekBar = findViewById(R.id.seekBar);
+        seekBar.setProgress((int)(MenuSongService.volume * 100));
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
+        MenuSongService.startMenuSong();
 
-        MenuSong.startMenuSong();
+        // Set listener for difficulty button
+        Button difficulty = findViewById(R.id.toggleButton);
+        difficulty.setOnClickListener(view -> {
+            if (Constants.HARD) {
+                Constants.setNormal();
+            } else {
+                Constants.setHard();
+            }
+        });
     }
 
     // Take the user back to the main menu
@@ -33,6 +42,9 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Set menu song volume based on slider amount
+     */
     SeekBar.OnSeekBarChangeListener seekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) { }
@@ -42,19 +54,26 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            MenuSong.setMenuSongVolume(seekBar.getProgress());
+            MenuSongService.setMenuSongVolume(seekBar.getProgress());
         }
     };
 
+
+    /**
+     * If resumed, resume music
+     */
     @Override
     protected void onResume() {
         super.onResume();
-        MenuSong.startMenuSong();
+        MenuSongService.startMenuSong();
     }
 
+    /**
+     * If paused, pause music
+     */
     @Override
     protected void onPause() {
         super.onPause();
-        MenuSong.pauseMenuSong();
+        MenuSongService.pauseMenuSong();
     }
 }
